@@ -1,76 +1,51 @@
 #!/bin/bash
-# Create Combined Masterpiece Videos
-set -e
+# Compose highlight reels from the strongest video takes in media/
+set -euo pipefail
 
-DIST="/Users/air/projects/robin66_site/dist"
+MEDIA_DIR="/Users/air/projects/robin66_site/media"
+DIST_DIR="/Users/air/projects/robin66_site/dist"
 
-echo "Creating combined masterpiece videos..."
+mkdir -p "$DIST_DIR"
 
-# Combined Video 1: Ultimate Journey - Best photos in sequence
-echo "🎬 Creating: Ultimate Journey..."
+log() {
+  printf '\n==> %s\n' "$1"
+}
+
+log "Rendering story reel: Prague sunrise to birthday toast"
 ffmpeg -y \
-  -loop 1 -t 6 -i "$DIST/R - 0.jpeg" \
-  -loop 1 -t 6 -i "$DIST/R - 1.jpeg" \
-  -loop 1 -t 6 -i "$DIST/R - 13.jpeg" \
-  -loop 1 -t 6 -i "$DIST/R - 15.jpg" \
-  -loop 1 -t 6 -i "$DIST/R - 20.JPG" \
-  -loop 1 -t 6 -i "$DIST/R - 22.JPG" \
-  -loop 1 -t 6 -i "$DIST/R - 25.jpeg" \
-  -loop 1 -t 6 -i "$DIST/R - 26.jpeg" \
-  -loop 1 -t 6 -i "$DIST/R - 27.jpeg" \
-  -loop 1 -t 6 -i "$DIST/R - 28.jpeg" \
+  -i "$MEDIA_DIR/scene1_final_video.mp4" \
+  -i "$MEDIA_DIR/scene2_final_video.mp4" \
+  -i "$MEDIA_DIR/scene3_edict_video.mp4" \
+  -i "$MEDIA_DIR/robin_birthday_final_correct.mp4" \
   -filter_complex "\
-    [0:v]scale=1920:1080:force_original_aspect_ratio=decrease,pad=1920:1080:(ow-iw)/2:(oh-ih)/2:color=black,setsar=1,fade=in:0:45,fade=out:105:45[v0]; \
-    [1:v]scale=1920:1080:force_original_aspect_ratio=decrease,pad=1920:1080:(ow-iw)/2:(oh-ih)/2:color=black,setsar=1,fade=in:0:45,fade=out:105:45[v1]; \
-    [2:v]scale=1920:1080:force_original_aspect_ratio=decrease,pad=1920:1080:(ow-iw)/2:(oh-ih)/2:color=black,setsar=1,fade=in:0:45,fade=out:105:45[v2]; \
-    [3:v]scale=1920:1080:force_original_aspect_ratio=decrease,pad=1920:1080:(ow-iw)/2:(oh-ih)/2:color=black,setsar=1,fade=in:0:45,fade=out:105:45[v3]; \
-    [4:v]scale=1920:1080:force_original_aspect_ratio=decrease,pad=1920:1080:(ow-iw)/2:(oh-ih)/2:color=black,setsar=1,fade=in:0:45,fade=out:105:45[v4]; \
-    [5:v]scale=1920:1080:force_original_aspect_ratio=decrease,pad=1920:1080:(ow-iw)/2:(oh-ih)/2:color=black,setsar=1,fade=in:0:45,fade=out:105:45[v5]; \
-    [6:v]scale=1920:1080:force_original_aspect_ratio=decrease,pad=1920:1080:(ow-iw)/2:(oh-ih)/2:color=black,setsar=1,fade=in:0:45,fade=out:105:45[v6]; \
-    [7:v]scale=1920:1080:force_original_aspect_ratio=decrease,pad=1920:1080:(ow-iw)/2:(oh-ih)/2:color=black,setsar=1,fade=in:0:45,fade=out:105:45[v7]; \
-    [8:v]scale=1920:1080:force_original_aspect_ratio=decrease,pad=1920:1080:(ow-iw)/2:(oh-ih)/2:color=black,setsar=1,fade=in:0:45,fade=out:105:45[v8]; \
-    [9:v]scale=1920:1080:force_original_aspect_ratio=decrease,pad=1920:1080:(ow-iw)/2:(oh-ih)/2:color=black,setsar=1,fade=in:0:45,fade=out:105:45[v9]; \
-    [v0][v1][v2][v3][v4][v5][v6][v7][v8][v9]concat=n=10:v=1:a=0,format=yuv420p[out]" \
-  -map "[out]" \
-  -c:v libx264 -preset slow -crf 18 -pix_fmt yuv420p \
+    [0:v]scale=1280:720:force_original_aspect_ratio=decrease,pad=1280:720:(ow-iw)/2:(oh-ih)/2:color=black,setsar=1[v0]; \
+    [1:v]scale=1280:720:force_original_aspect_ratio=decrease,pad=1280:720:(ow-iw)/2:(oh-ih)/2:color=black,setsar=1[v1]; \
+    [2:v]scale=1280:720:force_original_aspect_ratio=decrease,pad=1280:720:(ow-iw)/2:(oh-ih)/2:color=black,setsar=1[v2]; \
+    [3:v]scale=1280:720:force_original_aspect_ratio=decrease,pad=1280:720:(ow-iw)/2:(oh-ih)/2:color=black,setsar=1[v3]; \
+    [v0][0:a][v1][1:a][v2][2:a][v3][3:a]concat=n=4:v=1:a=1[v][a]" \
+  -map "[v]" -map "[a]" \
+  -c:v libx264 -preset medium -crf 20 \
+  -c:a aac -b:a 192k -ar 48000 \
   -movflags +faststart \
-  "$DIST/robin66_ultimate_journey.mp4"
+  "$DIST_DIR/robin66_story_reel.mp4"
 
-# Combined Video 2: Complete Celebration - Mix of photos and original footage
-echo "🎬 Creating: Complete Celebration..."
-# First create a trimmed version of the original video
-ffmpeg -y -i "$DIST/robin_video.mov" \
-  -vf "scale=1920:1080:force_original_aspect_ratio=decrease,pad=1920:1080:(ow-iw)/2:(oh-ih)/2:color=black" \
-  -c:v libx264 -preset fast -crf 22 -an \
-  -t 10 \
-  "$DIST/temp_original.mp4"
-
-# Now combine with photos
+log "Rendering performance reel: lakeside serenades and freestyle tributes"
 ffmpeg -y \
-  -loop 1 -t 5 -i "$DIST/R - 10.JPG" \
-  -loop 1 -t 5 -i "$DIST/R - 11.JPG" \
-  -loop 1 -t 5 -i "$DIST/R - 12.JPG" \
-  -i "$DIST/temp_original.mp4" \
-  -loop 1 -t 5 -i "$DIST/R - 16.jpg" \
-  -loop 1 -t 5 -i "$DIST/R - 17.jpg" \
-  -loop 1 -t 5 -i "$DIST/R - 18.jpg" \
+  -i "$MEDIA_DIR/robin_lakeside_singing_dog.mp4" \
+  -i "$MEDIA_DIR/The_dog_sings_202510060615.mp4" \
+  -i "$MEDIA_DIR/Freestyle_rap_artist_202510060618_e1u9s.mp4" \
+  -i "$MEDIA_DIR/Video_Generation_Jolly_Good_Fellow.mp4" \
   -filter_complex "\
-    [0:v]scale=1920:1080:force_original_aspect_ratio=decrease,pad=1920:1080:(ow-iw)/2:(oh-ih)/2:color=black,setsar=1,fade=in:0:40,fade=out:85:40[v0]; \
-    [1:v]scale=1920:1080:force_original_aspect_ratio=decrease,pad=1920:1080:(ow-iw)/2:(oh-ih)/2:color=black,setsar=1,fade=in:0:40,fade=out:85:40[v1]; \
-    [2:v]scale=1920:1080:force_original_aspect_ratio=decrease,pad=1920:1080:(ow-iw)/2:(oh-ih)/2:color=black,setsar=1,fade=in:0:40,fade=out:85:40[v2]; \
-    [3:v]setsar=1,fade=in:0:30,fade=out:st=9.5:d=0.5[v3]; \
-    [4:v]scale=1920:1080:force_original_aspect_ratio=decrease,pad=1920:1080:(ow-iw)/2:(oh-ih)/2:color=black,setsar=1,fade=in:0:40,fade=out:85:40[v4]; \
-    [5:v]scale=1920:1080:force_original_aspect_ratio=decrease,pad=1920:1080:(ow-iw)/2:(oh-ih)/2:color=black,setsar=1,fade=in:0:40,fade=out:85:40[v5]; \
-    [6:v]scale=1920:1080:force_original_aspect_ratio=decrease,pad=1920:1080:(ow-iw)/2:(oh-ih)/2:color=black,setsar=1,fade=in:0:40,fade=out:85:40[v6]; \
-    [v0][v1][v2][v3][v4][v5][v6]concat=n=7:v=1:a=0,format=yuv420p[out]" \
-  -map "[out]" \
-  -c:v libx264 -preset slow -crf 18 -pix_fmt yuv420p \
+    [0:v]scale=1280:720:force_original_aspect_ratio=decrease,pad=1280:720:(ow-iw)/2:(oh-ih)/2:color=black,setsar=1[v0]; \
+    [1:v]scale=1280:720:force_original_aspect_ratio=decrease,pad=1280:720:(ow-iw)/2:(oh-ih)/2:color=black,setsar=1[v1]; \
+    [2:v]scale=1280:720:force_original_aspect_ratio=decrease,pad=1280:720:(ow-iw)/2:(oh-ih)/2:color=black,setsar=1[v2]; \
+    [3:v]scale=1280:720:force_original_aspect_ratio=decrease,pad=1280:720:(ow-iw)/2:(oh-ih)/2:color=black,setsar=1[v3]; \
+    [v0][0:a][v1][1:a][v2][2:a][v3][3:a]concat=n=4:v=1:a=1[v][a]" \
+  -map "[v]" -map "[a]" \
+  -c:v libx264 -preset medium -crf 20 \
+  -c:a aac -b:a 192k -ar 48000 \
   -movflags +faststart \
-  "$DIST/robin66_complete_celebration.mp4"
+  "$DIST_DIR/robin66_performance_reel.mp4"
 
-# Cleanup
-rm -f "$DIST/temp_original.mp4"
-
-echo ""
-echo "✅ Combined masterpiece videos created!"
-ls -lh "$DIST"/robin66_ultimate*.mp4 "$DIST"/robin66_complete*.mp4
+log "Highlight reels ready in $DIST_DIR"
+ls -lh "$DIST_DIR"/robin66_*_reel.mp4
