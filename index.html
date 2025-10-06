@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Robin Wheatley — A Celebration of 66 Years</title>
+    <title>Robin Wheatley — 66th Birthday</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
@@ -16,49 +16,55 @@
         <div class="hero-content">
             <div class="title-container">
                 <h1 class="main-title">Robin Wheatley</h1>
-                <div class="subtitle">A Celebration of Sixty-Six Years</div>
-                <div class="date">Fifth of October, 2025</div>
+                <div class="subtitle">October 5, 2025</div>
+                <div class="date">Sixty-Six Years</div>
             </div>
         </div>
         <div class="scroll-indicator">
-            <span>Scroll to Continue</span>
+            <span>Scroll</span>
             <div class="scroll-line"></div>
         </div>
     </section>
 
-    <!-- Introduction -->
-    <section class="intro-section">
-        <div class="container">
-            <blockquote class="opening-quote">
-                "A life well-lived is measured not in years,<br>
-                but in the depth of knowledge gained,<br>
-                the places traveled, and the beauty appreciated."
-            </blockquote>
-        </div>
-    </section>
-
-    <!-- Video Feature -->
+    <!-- Video Section -->
     <section class="video-feature">
         <div class="container">
-            <h2 class="section-title">A Life in Motion</h2>
-
-            <div class="video-wrapper featured">
-                <h3 class="video-title">The Grand Journey</h3>
+            
+            <div class="video-card-large">
+                <h2 class="video-card-title">The Ultimate Journey</h2>
+                <p class="video-description">A curated collection of moments spanning decades. Ten photographs woven together with elegant transitions, capturing the essence of a life richly lived across England, Germany, and Italy.</p>
                 <video controls poster="dist/robin66_portrait.jpg" preload="metadata">
-                    <source src="dist/robin66_grand_journey.mp4" type="video/mp4">
+                    <source src="dist/robin66_ultimate_journey.mp4" type="video/mp4">
+                </video>
+            </div>
+
+            <div class="video-card-large">
+                <h2 class="video-card-title">Complete Celebration</h2>
+                <p class="video-description">A dynamic compilation blending still photography with authentic footage. Transitions from quiet contemplation to vibrant motion, showcasing both timeless portraits and candid moments.</p>
+                <video controls poster="dist/robin66_moments.jpg" preload="metadata">
+                    <source src="dist/robin66_complete_celebration.mp4" type="video/mp4">
                 </video>
             </div>
 
             <div class="video-grid-section">
                 <div class="video-card">
-                    <h4>Cherished Moments</h4>
-                    <video controls poster="dist/robin66_moments.jpg" preload="metadata">
+                    <h3>Grand Journey</h3>
+                    <p class="video-desc-small">Six landmark photographs with extended transitions</p>
+                    <video controls poster="dist/robin66_tapestry.jpg" preload="metadata">
+                        <source src="dist/robin66_grand_journey.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div class="video-card">
+                    <h3>Cherished Moments</h3>
+                    <p class="video-desc-small">Five selected scenes from memorable occasions</p>
+                    <video controls poster="dist/robin66_heritage.jpg" preload="metadata">
                         <source src="dist/robin66_cherished_moments.mp4" type="video/mp4">
                     </video>
                 </div>
                 <div class="video-card">
-                    <h4>The Celebration</h4>
-                    <video controls poster="dist/robin66_tapestry.jpg" preload="metadata">
+                    <h3>The Celebration</h3>
+                    <p class="video-desc-small">Original footage, professionally edited and enhanced</p>
+                    <video controls poster="dist/robin66_hero_collage.jpg" preload="metadata">
                         <source src="dist/robin66_celebration.mp4" type="video/mp4">
                     </video>
                 </div>
@@ -70,57 +76,8 @@
     <section class="gallery-section">
         <div class="container">
             <h2 class="section-title">Through the Years</h2>
-            <p class="section-intro">
-                From the distinguished architecture of St. Albans to the historic streets of Berlin,
-                from the shores of Lake Constance to the cultural capitals of Europe — a journey
-                marked by curiosity, refinement, and an unwavering appreciation for history.
-            </p>
-            
             <div class="gallery-grid" id="photoGallery">
-                <!-- Photos will be loaded dynamically -->
-            </div>
-        </div>
-    </section>
-
-    <!-- Tribute Section -->
-    <section class="tribute-section">
-        <div class="container">
-            <div class="tribute-content">
-                <h2 class="section-title">A Gentleman Scholar</h2>
-                
-                <div class="tribute-text">
-                    <p>
-                        Born on this day in 1959 in St. Albans, England, Robin Wheatley has cultivated
-                        a life of remarkable depth and distinction. His passion for the Great Western
-                        Railway speaks to an appreciation for the golden age of engineering and design.
-                    </p>
-                    
-                    <p>
-                        A devotee of classical music — strictly composed before 1900 — Robin's tastes
-                        reflect a profound understanding of the masters: Bach, Mozart, Beethoven, Wagner,
-                        Brahms. His discernment extends to the visual arts, where he favors passionate,
-                        detailed works over the abstract and conceptual.
-                    </p>
-                    
-                    <p>
-                        His extensive travels across German, Italian, and English landscapes, including
-                        years residing near Berlin's Brandenburg Gate and the serene beauty of Lake
-                        Constance, have shaped a worldview both cosmopolitan and deeply rooted in
-                        European cultural traditions.
-                    </p>
-                    
-                    <p>
-                        Robin's appreciation for British television classics — from "All Creatures Great
-                        and Small" to "Downton Abbey," from the wit of "Fawlty Towers" to the brilliance
-                        of "Monty Python" — reveals a man who values both sophistication and humor,
-                        tradition and innovation.
-                    </p>
-                    
-                    <p class="closing">
-                        Today we celebrate not merely a birthday, but a life lived with conviction,
-                        knowledge, and an uncompromising standard of excellence.
-                    </p>
-                </div>
+                <!-- Photos loaded dynamically -->
             </div>
         </div>
     </section>
@@ -131,8 +88,7 @@
             <div class="closing-message">
                 <div class="ornament">❦</div>
                 <h3>Happy Sixty-Sixth Birthday</h3>
-                <p>With deepest admiration and warmest wishes</p>
-                <div class="signature">— Those who know you well</div>
+                <p>With warmest wishes</p>
                 <div class="ornament">❦</div>
             </div>
         </div>
@@ -142,11 +98,10 @@
         <p>October 2025</p>
     </footer>
 
-    <!-- Lightbox for images -->
+    <!-- Lightbox -->
     <div class="lightbox" id="lightbox">
         <span class="lightbox-close">&times;</span>
         <img class="lightbox-content" id="lightbox-img">
-        <div class="lightbox-caption" id="lightbox-caption"></div>
     </div>
 
     <script src="script.js"></script>
