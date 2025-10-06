@@ -1,3 +1,11 @@
+// Birthday Card Opening
+const birthdayCard = document.getElementById('birthdayCard');
+if (birthdayCard) {
+    birthdayCard.addEventListener('click', () => {
+        birthdayCard.classList.toggle('opened');
+    });
+}
+
 // Photo Gallery Dynamic Loading
 const photoFiles = [
     'R - 0.jpeg', 'R - 1.jpeg', 'R - 2.jpeg', 'R - 3.jpeg', 'R - 4.jpeg',

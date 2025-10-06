@@ -24,6 +24,109 @@ body {
     background: var(--cream);
 }
 
+/* Birthday Card */
+.birthday-card-section {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4rem 2rem;
+    background: var(--burgundy);
+    perspective: 2000px;
+}
+
+.card-wrapper {
+    position: relative;
+}
+
+.birthday-card {
+    width: 600px;
+    max-width: 90vw;
+    height: 700px;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 1.2s cubic-bezier(0.4, 0.0, 0.2, 1);
+    cursor: pointer;
+}
+
+.birthday-card.opened {
+    transform: rotateY(-180deg);
+}
+
+.card-front,
+.card-inside {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border-radius: 12px;
+    box-shadow: 0 20px 80px rgba(0,0,0,0.4);
+}
+
+.card-front {
+    background: linear-gradient(135deg, var(--gold) 0%, #c4941f 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 3px solid var(--cream);
+}
+
+.card-front-content {
+    text-align: center;
+    color: var(--charcoal);
+}
+
+.card-front-content h2 {
+    font-size: clamp(3rem, 8vw, 5rem);
+    font-weight: 300;
+    margin-bottom: 1rem;
+    letter-spacing: 0.1em;
+}
+
+.card-front-content p {
+    font-size: 1.5rem;
+    font-style: italic;
+    opacity: 0.8;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 0.6; }
+    50% { opacity: 1; }
+}
+
+.card-inside {
+    background: var(--cream);
+    transform: rotateY(180deg);
+    padding: 3rem;
+    overflow-y: auto;
+}
+
+.card-inside-content {
+    color: var(--text);
+}
+
+.card-inside-content h3 {
+    font-size: 2.5rem;
+    color: var(--burgundy);
+    margin-bottom: 2rem;
+    font-weight: 400;
+}
+
+.card-inside-content p {
+    font-size: 1.2rem;
+    line-height: 1.8;
+    margin-bottom: 1.5rem;
+}
+
+.card-inside-content .signature {
+    margin-top: 3rem;
+    font-style: italic;
+    font-size: 1.3rem;
+    color: var(--burgundy);
+    font-weight: 600;
+}
+
 /* Hero Section */
 .hero {
     height: 100vh;
