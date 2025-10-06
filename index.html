@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Robin Wheatley — A Celebration of 66 Years</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <div class="title-container">
+                <h1 class="main-title">Robin Wheatley</h1>
+                <div class="subtitle">A Celebration of Sixty-Six Years</div>
+                <div class="date">Fifth of October, 2025</div>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <span>Scroll to Continue</span>
+            <div class="scroll-line"></div>
+        </div>
+    </section>
+
+    <!-- Introduction -->
+    <section class="intro-section">
+        <div class="container">
+            <blockquote class="opening-quote">
+                "A life well-lived is measured not in years,<br>
+                but in the depth of knowledge gained,<br>
+                the places traveled, and the beauty appreciated."
+            </blockquote>
+        </div>
+    </section>
+
+    <!-- Video Feature -->
+    <section class="video-feature">
+        <div class="container">
+            <h2 class="section-title">A Life in Motion</h2>
+
+            <div class="video-wrapper featured">
+                <h3 class="video-title">The Grand Journey</h3>
+                <video controls poster="dist/robin66_portrait.jpg" preload="metadata">
+                    <source src="dist/robin66_grand_journey.mp4" type="video/mp4">
+                </video>
+            </div>
+
+            <div class="video-grid-section">
+                <div class="video-card">
+                    <h4>Cherished Moments</h4>
+                    <video controls poster="dist/robin66_moments.jpg" preload="metadata">
+                        <source src="dist/robin66_cherished_moments.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div class="video-card">
+                    <h4>The Celebration</h4>
+                    <video controls poster="dist/robin66_tapestry.jpg" preload="metadata">
+                        <source src="dist/robin66_celebration.mp4" type="video/mp4">
+                    </video>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Photo Gallery -->
+    <section class="gallery-section">
+        <div class="container">
+            <h2 class="section-title">Through the Years</h2>
+            <p class="section-intro">
+                From the distinguished architecture of St. Albans to the historic streets of Berlin,
+                from the shores of Lake Constance to the cultural capitals of Europe — a journey
+                marked by curiosity, refinement, and an unwavering appreciation for history.
+            </p>
+            
+            <div class="gallery-grid" id="photoGallery">
+                <!-- Photos will be loaded dynamically -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Tribute Section -->
+    <section class="tribute-section">
+        <div class="container">
+            <div class="tribute-content">
+                <h2 class="section-title">A Gentleman Scholar</h2>
+                
+                <div class="tribute-text">
+                    <p>
+                        Born on this day in 1959 in St. Albans, England, Robin Wheatley has cultivated
+                        a life of remarkable depth and distinction. His passion for the Great Western
+                        Railway speaks to an appreciation for the golden age of engineering and design.
+                    </p>
+                    
+                    <p>
+                        A devotee of classical music — strictly composed before 1900 — Robin's tastes
+                        reflect a profound understanding of the masters: Bach, Mozart, Beethoven, Wagner,
+                        Brahms. His discernment extends to the visual arts, where he favors passionate,
+                        detailed works over the abstract and conceptual.
+                    </p>
+                    
+                    <p>
+                        His extensive travels across German, Italian, and English landscapes, including
+                        years residing near Berlin's Brandenburg Gate and the serene beauty of Lake
+                        Constance, have shaped a worldview both cosmopolitan and deeply rooted in
+                        European cultural traditions.
+                    </p>
+                    
+                    <p>
+                        Robin's appreciation for British television classics — from "All Creatures Great
+                        and Small" to "Downton Abbey," from the wit of "Fawlty Towers" to the brilliance
+                        of "Monty Python" — reveals a man who values both sophistication and humor,
+                        tradition and innovation.
+                    </p>
+                    
+                    <p class="closing">
+                        Today we celebrate not merely a birthday, but a life lived with conviction,
+                        knowledge, and an uncompromising standard of excellence.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Closing -->
+    <section class="closing-section">
+        <div class="container">
+            <div class="closing-message">
+                <div class="ornament">❦</div>
+                <h3>Happy Sixty-Sixth Birthday</h3>
+                <p>With deepest admiration and warmest wishes</p>
+                <div class="signature">— Those who know you well</div>
+                <div class="ornament">❦</div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>October 2025</p>
+    </footer>
+
+    <!-- Lightbox for images -->
+    <div class="lightbox" id="lightbox">
+        <span class="lightbox-close">&times;</span>
+        <img class="lightbox-content" id="lightbox-img">
+        <div class="lightbox-caption" id="lightbox-caption"></div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,75 @@
+Prompt: Robin Wheatley Intro — Veo 3e + Gemini + ElevenLabs (with Image-based Scenes)
+
+Role
+
+Manus AI orchestrating MCP tools. Use all three or fail:
+	•	veo-3e-mcp video + high-quality audio beta
+	•	gemini-mcp plan, captions, QC
+	•	elevenlabs-mcp brief VO
+
+Inputs
+
+IMAGES_ORDERED: [
+  "img_bridge_two_people.jpg",
+  "img_villa_ulivello_two_people.jpg",
+  "img_lakeside_dog_sunset.jpg"
+]
+ASPECT: 16:9
+FPS: 24
+DURATION_TARGET: 75–105 sec
+MUSIC_PD: gentle PD classical piano + light strings
+SFX: {church_bells, soft_wind, distant_trains, market_ambience, dog_howl_soft, light_claps}
+VOICE: {voice_id: "british_warm_neutral", speed: 0.98, pitch: -1}
+SAFE_AREAS: {title_margin_pct: 8, caption_margin_pct: 6}
+BRAND_COLORS: {primary:"#C5A574", secondary:"#EFE8D8", text:"#FFFFFF"}
+
+Creative Brief
+
+Warm, classic, elegant. Begin on the first image. End on the last image. Subtle film grain. Early sepia then natural color. Cross-dissolves. Mild Ken Burns.
+
+Scene Plan
+	1.	Photo Scene A — Bridge Portrait Dance (uses IMAGES_ORDERED[0], 00:00–00:12)
+Animate two subjects to a gentle partner-dance loop (waist-up sway, small steps) via mesh-warp rigging. Parallax background. Title at 00:03: “Celebrating Robin Wheatley – A Life of Wonder”. Audio: piano + soft wind.
+	2.	Boarding School Memories (00:12–00:26)
+Nostalgic study hall motifs. Sepia fade. Bells low.
+	3.	Railways to Europe (00:26–00:48)
+GWR → Brandenburg Gate → Lake Constance. Add distant trains.
+	4.	Photo Scene B — Villa Ulivello Dance (uses IMAGES_ORDERED[1], 00:48–01:00)
+Animate the two subjects to dance together again. Small shoulder sway, hand-tap sync. Respect sign texture. Confetti micro-burst at end. Strings light.
+	5.	Travels & Culture (01:00–01:18)
+Florence villa, Christmas market, English manors. Market ambience low.
+	6.	Photo Scene C — Dog Birthday Salute (uses IMAGES_ORDERED[2], 01:18–01:34)
+Animate dog head-tilt, ear perk, brief paw-raise salute. Lip-sync to a short breathy lounge-style birthday croon in the style of Marilyn Monroe’s famous performance, without reproducing protected lyrics in text. Layer tasteful dog_howl_soft on the melody tail. Include a single spoken line VO: “Happy birthday, Robin.” Music ducks under VO by −4 dB.
+	7.	Dedication Close (01:34–end ~01:40)
+Hold on IMAGES_ORDERED[2] last 4–6 s. Text: “With love from Jeffrey and friends.” Gentle crescendo and resolve.
+
+Voiceover (≤35 s total)
+	•	Line A at Scene 1 start: “From St. Albans beginnings to a life of wonder.”
+	•	Line B at Scene 3 bridge: “Tracks and travels, cherished places, lasting memories.”
+	•	Line C at Scene 6 end: “Happy birthday, Robin.”
+Synthesis: neutral-warm. De-esser on. No song lyrics printed in prompts.
+
+Tool Plan
+	1.	gemini-mcp.plan_scenes with above plan and image indices.
+	2.	gemini-mcp.check_assets verify all three paths.
+	3.	elevenlabs-mcp.tts_synthesize for Lines A–C and a 10–12 s “Monroe-style lounge croon” bed using non-lexical syllables; no lyric text.
+	4.	veo-3e-mcp.project_create ASPECT 16:9, FPS 24, subtle grain, early sepia=0.25.
+	5.	veo-3e-mcp.timeline_add_images maintain exact order; Ken Burns pan ≤8%, zoom ≤6%.
+	6.	veo-3e-mcp.audio.music_select PD piano + strings, 62–72 BPM.
+	7.	veo-3e-mcp.audio.add_sfx bells S1, trains S3, market S5, dog_howl_soft S6 tail. Sidechain VO −6 dB.
+	8.	veo-3e-mcp.audio.add_voiceover place Lines A–C at cues. Loudness −16 LUFS.
+	9.	veo-3e-mcp.motion.photo_anim mesh-rig for S1 and S4 dance, constrain to avoid facial warping; S6 paw-raise ≤15° warp.
+	10.	veo-3e-mcp.text_overlays Cinzel, within safe areas.
+	11.	veo-3e-mcp.transitions_apply 12–18 frame dissolves; sepia-fade S1→S2.
+	12.	gemini-mcp.qc_review enforce first frame = IMAGES_ORDERED[0], final frame = IMAGES_ORDERED[2], duration window, audio levels, artifact check.
+	13.	veo-3e-mcp.render_export MP4 H.264 24 fps 20–30 Mbps + stems and manifest.
+
+Constraints
+
+No asset hallucination. No watermarks. Respect image order. Do not print or paste song lyrics.
+
+Deliverables
+
+robin_birthday_intro.mp4, robin_birthday_intro_manifest.json, audio_stems/, qc_report.txt.
+
+Notes: replace the three placeholder paths with your actual files. The dog scene uses non-lexical croon plus a single birthday line and layered howl to meet lyric constraints.
