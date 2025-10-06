@@ -6,6 +6,131 @@ if (birthdayCard) {
     });
 }
 
+// Video Carousel
+const carouselSlides = [
+    {
+        type: 'video',
+        src: 'dist/videos/01_prague_morning.mp4',
+        title: 'Prague Morning',
+        description: 'Sunrise over Charles Bridge as dawn bells echo through Old Town.'
+    },
+    {
+        type: 'video',
+        src: 'dist/videos/02_white_mountain.mp4',
+        title: 'White Mountain Procession',
+        description: 'Cavalry banners and marching drums climbing toward the monastery ridge.'
+    },
+    {
+        type: 'video',
+        src: 'dist/videos/03_imperial_edict.mp4',
+        title: 'Imperial Edict',
+        description: 'The proclamation ceremony captured in cinematic detail.'
+    },
+    {
+        type: 'image',
+        src: 'dist/videos/painting_01.png',
+        title: 'Renaissance Portrait I',
+        description: 'Classical painting in the tradition of the old masters.'
+    },
+    {
+        type: 'video',
+        src: 'dist/videos/04_birthday_toast.mp4',
+        title: 'Birthday Toast',
+        description: 'Champagne raised, candles glowing, family singing in harmony.'
+    },
+    {
+        type: 'image',
+        src: 'dist/videos/painting_02.png',
+        title: 'Renaissance Portrait II',
+        description: 'Timeless portraiture echoing the great European tradition.'
+    },
+    {
+        type: 'video',
+        src: 'dist/videos/05_lakeside_serenade.mp4',
+        title: 'Lakeside Serenade',
+        description: 'Max the spaniel harmonizing by the water at sunset.'
+    },
+    {
+        type: 'video',
+        src: 'dist/videos/06_freestyle_tribute.mp4',
+        title: 'Freestyle Tribute',
+        description: 'An impromptu birthday rap celebration.'
+    },
+    {
+        type: 'image',
+        src: 'dist/videos/painting_03.png',
+        title: 'Renaissance Portrait III',
+        description: 'Final masterpiece in classical European style.'
+    },
+    {
+        type: 'video',
+        src: 'dist/videos/07_jolly_good_fellow.mp4',
+        title: 'Jolly Good Fellow',
+        description: 'The family chorus that brought rehearsals to a close.'
+    },
+    {
+        type: 'video',
+        src: 'dist/videos/08_thirty_years_war.mp4',
+        title: 'Thirty Years War',
+        description: 'Epic cinematic journey through European history.'
+    }
+];
+
+let currentSlide = 0;
+const carouselContent = document.getElementById('carouselContent');
+const carouselDots = document.getElementById('carouselDots');
+const prevBtn = document.getElementById('prevBtn');
+const nextBtn = document.getElementById('nextBtn');
+
+if (carouselContent) {
+    // Build carousel slides
+    carouselSlides.forEach((slide, index) => {
+        const slideDiv = document.createElement('div');
+        slideDiv.className = 'carousel-slide';
+
+        const mediaElement = slide.type === 'video'
+            ? `<video controls preload="metadata"><source src="${slide.src}" type="video/mp4"></video>`
+            : `<img src="${slide.src}" alt="${slide.title}">`;
+
+        slideDiv.innerHTML = `
+            <h2>${slide.title}</h2>
+            <p>${slide.description}</p>
+            ${mediaElement}
+        `;
+        carouselContent.appendChild(slideDiv);
+
+        // Build dots
+        const dot = document.createElement('button');
+        dot.className = 'carousel-dot';
+        if (index === 0) dot.classList.add('active');
+        dot.addEventListener('click', () => goToSlide(index));
+        carouselDots.appendChild(dot);
+    });
+
+    // Navigation functions
+    function goToSlide(n) {
+        // Pause all videos
+        document.querySelectorAll('.carousel-slide video').forEach(v => v.pause());
+
+        currentSlide = (n + carouselSlides.length) % carouselSlides.length;
+        carouselContent.style.transform = `translateX(-${currentSlide * 100}%)`;
+
+        // Update dots
+        document.querySelectorAll('.carousel-dot').forEach((dot, i) => {
+            dot.classList.toggle('active', i === currentSlide);
+        });
+    }
+
+    prevBtn.addEventListener('click', () => goToSlide(currentSlide - 1));
+    nextBtn.addEventListener('click', () => goToSlide(currentSlide + 1));
+
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowLeft') goToSlide(currentSlide - 1);
+        if (e.key === 'ArrowRight') goToSlide(currentSlide + 1);
+    });
+}
+
 // Photo Gallery Dynamic Loading
 const photoFiles = [
     'R - 0.jpeg', 'R - 1.jpeg', 'R - 2.jpeg', 'R - 3.jpeg', 'R - 4.jpeg',
